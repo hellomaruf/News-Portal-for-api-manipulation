@@ -8,24 +8,32 @@ const newsCategory = async () => {
   let allCategory = data.data.news_category;
   allCategory.map(function (element) {
     let categoryName = element.category_name;
-    addCategoryName(categoryName);
+    let categoryId = element.category_id;
+
+    addCategoryName(categoryName, categoryId);
   });
 };
 newsCategory();
 
-let addCategoryName = (categoryName) => {
+let addCategoryName = (categoryName, categoryId) => {
   let button = document.createElement("button");
-  button.className = "text-gray-500 font-normal";
-  button.innerText = categoryName;
+  button.className = "";
+  button.innerHTML = `
+    <button onclick=categoryDetails('${categoryId}') class="text-gray-500 font-normal">${categoryName}</button>
+    `;
+
   categoryBtnContainer.appendChild(button);
 };
 
-const categoryDetails = async () => {
+
+
+const categoryDetails = async (catId) => {
   let res = await fetch(
-    "https://openapi.programming-hero.com/api/news/category/01"
+    `https://openapi.programming-hero.com/api/news/category/${catId}`
   );
   let data = await res.json();
   let allDetails = data.data;
+  cardContainer.innerHTML = "";
   allDetails.map(function (element) {
     console.log(element);
     let cardDiv = document.createElement("div");
@@ -34,12 +42,14 @@ const categoryDetails = async () => {
       <img class="w-96 max-h-3xl" src="${element.thumbnail_url}" alt="Movie"/>
       <div class="card-body">
         <h2 class="card-title font-bold">${element.title}</h2>
-        <p>${element.details}</p>
+        <p>${element.details.slice(0, 300)}</p>
         
         <div class="flex justify-between items-center">
           <div class="flex items-center gap-4">
               <div class="">
-                  <img class="w-10 h-10 rounded-full" src="${element.author.img}" alt="" srcset="">
+                  <img class="w-10 h-10 rounded-full" src="${
+                    element.author.img
+                  }" alt="" srcset="">
               </div>
               <div class="">
                   <p class="font-bold">${element.author.name}</p>
@@ -66,4 +76,4 @@ const categoryDetails = async () => {
     cardContainer.appendChild(cardDiv);
   });
 };
-categoryDetails();
+categoryDetails('01');
