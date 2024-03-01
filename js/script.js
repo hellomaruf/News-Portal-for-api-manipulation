@@ -1,5 +1,7 @@
 let categoryBtnContainer = document.getElementById("category-btn-container");
 let cardContainer = document.getElementById("card-container");
+let loader = document.getElementById("loader");
+
 const newsCategory = async () => {
   let res = await fetch(
     "https://openapi.programming-hero.com/api/news/categories"
@@ -23,9 +25,20 @@ let addCategoryName = (categoryName, categoryId) => {
     `;
 
   categoryBtnContainer.appendChild(button);
+  button.addEventListener("click", function () {
+    loader.classList.remove("hidden");
+  });
 };
 
-
+let handleSearchBtnById = () => {
+  let searchInputvalue = document.getElementById("search-input").value;
+  if (searchInputvalue) {
+    categoryDetails(searchInputvalue);
+  } else {
+    alert("Please enter a valid catId");
+  }
+  loader.classList.remove("hidden");
+};
 
 const categoryDetails = async (catId) => {
   let res = await fetch(
@@ -33,9 +46,11 @@ const categoryDetails = async (catId) => {
   );
   let data = await res.json();
   let allDetails = data.data;
+  if (allDetails.length > 0) {
+    loader.classList.add("hidden");
+  }
   cardContainer.innerHTML = "";
   allDetails.map(function (element) {
-    console.log(element);
     let cardDiv = document.createElement("div");
     cardDiv.innerHTML = `
       <div class="card card-side bg-base-100 shadow-md m-8">
@@ -76,4 +91,4 @@ const categoryDetails = async (catId) => {
     cardContainer.appendChild(cardDiv);
   });
 };
-categoryDetails('01');
+categoryDetails("01");

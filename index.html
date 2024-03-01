@@ -68,10 +68,19 @@
 
     <!-- Search area -->
     <div class="flex gap-4 max-w-7xl mx-auto mt-5">
-        <input type="email" id="helper-text" aria-describedby="helper-text-explanation" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5  " placeholder="4 items found for category Entertainment">
-        <button class="bg-purple-500 text-white px-3 rounded-lg">Search</button>
+        <input id="search-input" type="email" id="helper-text" aria-describedby="helper-text-explanation" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5  " placeholder="Type here category ID Number....">
+        <button onclick="handleSearchBtnById()" class="bg-purple-500 text-white px-3 rounded-lg">Search</button>
     </div>
 
+    <!-- sort button -->
+    <div class="text-center">
+        <button onclick="" class="btn mt-8 bg-purple-500 text-white hover:bg-purple-400">Sort by View</button>
+    </div>
+
+    <!-- loader -->
+    <div id="loader" class="text-center pt-6 text-purple-500 hidden">
+        <span class="loading loading-dots loading-lg"></span>
+    </div>
     <!-- news card -->
     <div id="card-container" class="max-w-7xl mx-auto mt-10">
         
