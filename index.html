@@ -13,6 +13,61 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <h1 class="font-bold">hello</h1>
+    <!-- navbar -->
+    <div class="">
+      <div class="navbar max-w-7xl py-6 mx-auto bg-base-100">
+        <div class="flex-1">
+          <a class="text-2xl font-bold text-purple-500"><span class="bg-purple-500 p-1 text-white">News</span> Portal</a>
+        </div>
+        <div class="flex">
+          <div class=" flex items-center gap-8 dropdown dropdown-end">
+            <div class="flex gap-4">
+                <h2 class="text-md texl text-purple-500 font-semibold">News</h2>
+                <h2 class="text-md text-gray-600 font-semibold">Blog</h2>
+              </div>
+          <div class="dropdown dropdown-end">
+            <div
+              tabindex="0"
+              role="button"
+              class="btn btn-ghost btn-circle avatar"
+            >
+              <div class="w-10 rounded-full">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="assets/profile.png"
+                />
+              </div>
+            </div>
+            <ul
+              tabindex="0"
+              class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <a class="justify-between">
+                  Profile
+                  <span class="badge">New</span>
+                </a>
+              </li>
+              <li><a>Settings</a></li>
+              <li><a>Logout</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- category button -->
+    <div  id="category-btn-container" class="flex justify-center gap-8 mt-3">
+       
+    </div>
+
+    <!-- Search area -->
+    <div class="flex gap-4 max-w-7xl mx-auto mt-5">
+        <input type="email" id="helper-text" aria-describedby="helper-text-explanation" class="bg-gray-50 border  border-gray-300 text-gray-900 text-sm rounded-lg focus:outline-none  block w-full p-2.5  " placeholder="4 items found for category Entertainment">
+        <button class="bg-purple-500 text-white px-3 rounded-lg">Search</button>
+    </div>
+
+    <!-- script -->
+    <script src="js/script.js"></script>
   </body>
 </html>
