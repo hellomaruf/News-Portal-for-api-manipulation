@@ -2,6 +2,7 @@ let categoryBtnContainer = document.getElementById("category-btn-container");
 let cardContainer = document.getElementById("card-container");
 let loader = document.getElementById("loader");
 let sortBtn = document.getElementById("sort-btn");
+let selectedCat = "01";
 
 const newsCategory = async () => {
   let res = await fetch(
@@ -32,22 +33,24 @@ let addCategoryName = (categoryName, categoryId) => {
 };
 
 let handleSearchBtnById = () => {
-  let searchInputvalue = document.getElementById("search-input").value;
-  if (searchInputvalue) {
-    categoryDetails(searchInputvalue);
+  let searchInput = document.getElementById("search-input");
+  let searchInputValue = searchInput.value
+  searchInput.value = "";
+  if (searchInputValue) {
+    categoryDetails(searchInputValue);
   } else {
     alert("Please enter a valid catId");
   }
   loader.classList.remove("hidden");
 };
 
-let selectedCat = "01";
 let sortByView = false;
 sortBtn.addEventListener("click", function () {
   sortByView = true;
   categoryDetails(selectedCat, sortByView);
 });
 const categoryDetails = async (catId, sortByView) => {
+  selectedCat = catId;
   let res = await fetch(
     `https://openapi.programming-hero.com/api/news/category/${catId}`
   );
@@ -57,7 +60,6 @@ const categoryDetails = async (catId, sortByView) => {
   if (sortByView) {
     allDetails.sort((a, b) => {
       let totalViewFirstNum = a.total_view || 0;
-      console.log(totalViewFirstNum);
       let totalViewSecondNum = b.total_view || 0;
       return totalViewSecondNum - totalViewFirstNum;
     });
@@ -67,8 +69,6 @@ const categoryDetails = async (catId, sortByView) => {
   }
   cardContainer.innerHTML = "";
   allDetails.map(function (element) {
-
-
     let cardDiv = document.createElement("div");
     cardDiv.innerHTML = `
       <div class="card card-side bg-base-100 shadow-md m-8">
